@@ -1,11 +1,12 @@
 import React from "react";
+import Task from "./components/Task";
 
 export default class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
      inputValue: '',
-     message: '',
+     messages: [{text: 'Task1', completed: false}, {text: 'Task2', completed: false}, {text: 'Task3', completed: true}],
       //counter: 0
     }
     this.submitHandler = this.submitHandler.bind(this)
@@ -13,10 +14,14 @@ export default class App extends React.Component {
 
   submitHandler(event) {
     event.preventDefault();
-    this.setState({message: this.state.inputValue, inputValue: ''})
+    if (this.state.inputValue !== '')
+    this.setState((prevState) => {
+      // return {messages: [...prevState.messages, <Task key={prevState.messages.length} text={this.state.inputValue}/>], inputValue: ''}})
+      return {messages: [...prevState.messages, {text: prevState.inputValue, completed: false}], inputValue: ''}})
   }
 
   render() {
+    
     return (
       <>
     <form onSubmit={this.submitHandler}>
@@ -24,7 +29,12 @@ export default class App extends React.Component {
      }} type="text"/>
      <button type="submit">Submit</button>
     </form>
-    <p>{this.state.message}</p>
+    {/* <p>{this.state.message}</p> */}
+     <ul>
+       {this.state.messages.map((task, index) => {
+         return <Task key={index} text={task.text} completed={task.completed}/>
+       })}
+     </ul>
     </>
     )
   }

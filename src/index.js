@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App";
-import "./test";
-import "./animals";
+//import "./test";
+//import "./animals";
 
 
 ReactDOM.render(

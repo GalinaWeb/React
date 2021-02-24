@@ -6,25 +6,31 @@ export default class SuperAnimals {
         this.color = color;
     }
 
-    characteristics (height, weight, color) {
-        return `${this.weight} ${this.height} ${this.color}`
+    characteristics () {
+        return `вес: ${this.weight} рост: ${this.height} цвет: ${this.color}`
+    }
+
+    //это тоже самое, только со стрелочной функцией, тут сразу обращение к вышестоящему классу
+    characteristicsArrow = () => {
+        return `вес: ${this.weight} рост: ${this.height} цвет: ${this.color}`
     }
 
     move () {
-        console.log('Иду на 4 лапах')
+        return 'Иду на 4 лапах'
     }
 }
 
 class Cats extends SuperAnimals {
-    constructor(height, weight, color) {
+    constructor(height, weight, color, name) {
     super(height, weight, color)
     }
     sound (){
-        console.log ('Мяу');
+        return 'Мяу'
     }
 }
 
 const Cat = new Cats ('3 kg', '10 sm', 'brown') 
+console.log (Cat);
 console.log (Cat.characteristics());
 console.log (Cat.move())
 console.log (Cat.sound());
@@ -34,7 +40,7 @@ console.log (Cat.sound());
     super(height, weight, color)
     }
     sound (){
-        console.log ('Гав');
+        return'Гав';
     }
 }
 
@@ -48,7 +54,7 @@ console.log (Dog.sound());
     super(height, weight, color)
     }
     sound (){
-        console.log ('Иг');
+        return 'Иг';
     }
 }
 
@@ -62,11 +68,21 @@ class Cows extends SuperAnimals {
     super(height, weight, color)
     }
     sound (){
-        console.log ('Му');
+        return'Му';
     }
 }
 const Cow = new Cows ('300 kg', '190 sm', 'white and black') 
 console.log (Cow.characteristics());
 console.log (Cow.move())
 console.log (Cow.sound());
+
+const capCowChar = capitalizeDecorator(Cow.characteristics.bind(Cow))
+const capCowCharArr = capitalizeDecorator(Cow.characteristicsArrow)
+console.log(capCowCharArr());
+
+function capitalizeDecorator(callback) {
+    return function () {
+        return callback().toUpperCase()
+    }
+}
 
