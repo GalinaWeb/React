@@ -20,6 +20,16 @@ export default class App extends React.Component {
       return {messages: [...prevState.messages, {text: prevState.inputValue, completed: false}], inputValue: ''}})
   }
 
+  toggleMessage = (index) => {
+    this.setState((prevState) => {
+      const newMessages = [...prevState.messages]
+      newMessages[index].completed = !newMessages[index].completed
+      return{
+        messages: newMessages
+      }
+    })
+  }
+
   render() {
     
     return (
@@ -32,7 +42,7 @@ export default class App extends React.Component {
     {/* <p>{this.state.message}</p> */}
      <ul>
        {this.state.messages.map((task, index) => {
-         return <Task key={index} text={task.text} completed={task.completed}/>
+         return <Task key={index} index={index} text={task.text} completed={task.completed} toggleMessage={this.toggleMessage}/>
        })}
      </ul>
     </>
@@ -92,19 +102,6 @@ testObj.method1()
 
 const childObj = new ChildClass ('Hello', 'World')
 childObj.method1()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

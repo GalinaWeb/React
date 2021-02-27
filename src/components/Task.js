@@ -1,3 +1,5 @@
 export default function Task(props) {
-    return <li style={{textDecoration: props.completed ? "line-through" : "none"}}>{props.text}</li>
+    return (<li onClick={() => props.toggleMessage(props.index)}
+    style={{textDecoration: props.completed ? "line-through" : "none"}}>{props.text}</li>
+    )
 }
