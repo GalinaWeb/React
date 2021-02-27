@@ -23,7 +23,7 @@ export default class App extends React.Component {
   toggleMessage = (index) => {
     this.setState((prevState) => {
       const newMessages = [...prevState.messages]
-      newMessages[index].completed = !newMessages[index].completed
+      newMessages[index]= {...newMessages[index], completed: !newMessages[index].completed}
       return{
         messages: newMessages
       }
